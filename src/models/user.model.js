@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 
     watchHistroy: [
         {
-            type: Schema.Type.ObjectID,
+            type: mongoose.Schema.Types.ObjectID,
             ref: "video"
         }
     ],
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre("save", async function (next){
     if(!this.isModified("password")) return next();
-    this.password = bcrpyt.hash(this.password, 10)
+    this.password = await bcrpyt.hash(this.password, 10)
     next()
 })
 
@@ -77,7 +77,7 @@ userSchema.methods.generateAccessToken = async function (){
     )
 }
 
-userSchema.method.generateRefreshToken = function () {
+userSchema.method.generateRefreshToken = async function () {
       return await jwt.sign(
         {
             _id: this._id
