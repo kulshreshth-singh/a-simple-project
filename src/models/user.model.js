@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 
     watchHistroy: [
         {
-            type: mongoose.Schema.Types.ObjectID,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "video"
         }
     ],
@@ -51,11 +51,14 @@ const userSchema = new mongoose.Schema({
 
 },{timestamps: true})
 
-userSchema.pre("save", async function (next){
-    if(!this.isModified("password")) return next();
+userSchema.pre("save", async function (){
+    if(!this.isModified("password")){
+        return;
+    }
     this.password = await bcrpyt.hash(this.password, 10)
-    next()
+   
 })
+
 
 userSchema.methods.isPasswordCorrect = async function (password) {
    return await bcrpyt.compare(password,this.password)
@@ -77,7 +80,7 @@ userSchema.methods.generateAccessToken = async function (){
     )
 }
 
-userSchema.method.generateRefreshToken = async function () {
+userSchema.methods.generateRefreshToken = async function () {
       return await jwt.sign(
         {
             _id: this._id

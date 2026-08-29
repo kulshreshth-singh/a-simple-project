@@ -18,7 +18,7 @@ const registerUser = asyncHandler( async (req , res) =>{
 
 //fetching data for user
    const {fullName, email, username , password} = req.body
-   console.log("email: ", email);
+   console.log("req.body --> ",req.body);
 
    //check if something empty some mean any of it , field just  variable ,?. "If this thing doesn't exist, don't crash the program; give me undefined instead." or is optional chain pervent from undefined and null, trim() help to remove empty space in string , if empty throw api Error
 
@@ -35,6 +35,8 @@ const registerUser = asyncHandler( async (req , res) =>{
   if(existedUser){
     throw new ApiError(409, "User with email or username already exits")
   } 
+console.log("req.files--> ",req.files);
+
     // check if image and avatar is exist or not 
     //req.files api for requesting files files is in multer that store data in object from and that key store the arary therfore [0], .path is the local address of avatar or image , ?. represent "If this thing doesn't exist, don't crash the program; give me undefined instead."
   const avatarlocalPath = req.files?.avatar?.[0]?.path
@@ -87,7 +89,7 @@ const registerUser = asyncHandler( async (req , res) =>{
 
 
 
-   
+
 })
 
 
