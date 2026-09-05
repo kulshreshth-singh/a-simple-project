@@ -51,20 +51,32 @@ const userSchema = new mongoose.Schema({
 
 },{timestamps: true})
 
+// before saving in mongose --> .pre
+// when user.save() is call before that this middleware will work
 userSchema.pre("save", async function (){
+    //  check if you modified your already encrypt password if not return old one
     if(!this.isModified("password")){
         return;
     }
+
+    // before saving the password encrypt it
     this.password = await bcrpyt.hash(this.password, 10)
    
 })
-
-
+// arrow functions don't have their own dynamic this, so Mongoose cannot bind this to the document in the way this middleware needs.
+// this mean user
+// compare the password and return true and false
+// arrow function cannot work with this ..
 userSchema.methods.isPasswordCorrect = async function (password) {
    return await bcrpyt.compare(password,this.password)
 }
+// creates a method that every User document can use.
 
+//Access Token
+// = temporary ID card
 
+// Refresh Token
+// = long-term permission to get a new ID card
 userSchema.methods.generateAccessToken = async function (){
     return await jwt.sign(
         {
