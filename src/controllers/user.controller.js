@@ -199,6 +199,11 @@ const logoutUser = asyncHandler( async(req,res) => {
   .json(new ApiResponse(200, {}, "User logged Out"))
 })
 
+//access token --> it is used to not doing login again and again for api req
+// short live and have information and payload
+//refresh token --> it is use to refresh the accees token for a long period of time 
+//Access token = proof that the user has already authenticated, attached to protected API requests.
+
 const refreshAccessToken = asyncHandler(async (req, res) =>{
    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
 
