@@ -51,6 +51,8 @@ const userSchema = new mongoose.Schema({
 
 },{timestamps: true})
 
+// hooks........................  
+
 // before saving in mongose --> .pre
 // when user.save() is call before that this middleware will work
 userSchema.pre("save", async function (){
