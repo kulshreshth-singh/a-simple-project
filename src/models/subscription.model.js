@@ -3,13 +3,13 @@ import mongoose from "mongoose";
 
 const subscriptionSchema = new mongoose.Schema({
 
-    Subscriber: {
+    subscriber: {
         type: mongoose.Schema.Types.ObjectId,
-        href: "User"
+        ref: "User"
     },
     channel: {
         type: mongoose.Schema.Types.ObjectId,
-        href: "User"
+        ref: "User"
     }
 
 

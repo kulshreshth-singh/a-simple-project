@@ -4,7 +4,7 @@ const tweetSchema = new Schema(
 {
 
     owner:{
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User"
     },
     content: {
@@ -23,4 +23,4 @@ const tweetSchema = new Schema(
 
 
 
-export const Tweet = mongoose.model( "Tweet", TweetSchema )
+export const Tweet = mongoose.model( "Tweet", tweetSchema )
