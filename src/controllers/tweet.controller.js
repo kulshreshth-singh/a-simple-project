@@ -64,8 +64,8 @@ const getUserTweets = asyncHandler(async (req, res) => {
     // fetching from url
     const {userId} = req.params
     // userId got trim and if nothing left api error
-    if(!userId?.trim()){
-        throw new ApiError(400 , "userId missing");  
+   if(!isValidObjectId(userId)){
+    throw new ApiError(400, "userId is not valid");
     }
    // important part where i get various learnig 
    // which thing i was find ---owner , by who's help --userId
@@ -96,10 +96,9 @@ const updateTweet = asyncHandler(async (req, res) => {
     let{newContent} = req.body
      
     // check if empty or not
-    if(!tweetId?.trim()){
-        throw new ApiError(400 , "Tweet not found");
-    }
-      // check if empty or not
+if(!isValidObjectId(tweetId)){
+    throw new ApiError(400, "tweetId is not valid");
+}      // check if empty or not
     if(!newContent?.trim()){
         throw new ApiError(400 , "newContent is required")
     }
@@ -144,9 +143,9 @@ const deleteTweet = asyncHandler(async (req, res) => {
 
     let{tweetId} = req.params;
 
-    if(!tweetId?.trim()){
-        throw new ApiError(400 , "tweetId not found");
-    }
+  if(!isValidObjectId(tweetId)){
+    throw new ApiError(400, "tweetId is not valid");
+}
 
     const tweeted = await Tweet.findById(tweetId).select("owner")
 
