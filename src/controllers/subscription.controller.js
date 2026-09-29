@@ -10,7 +10,7 @@ const toggleSubscription = asyncHandler(async (req, res) => {
     const {channelId} = req.params
     // TODO: toggle subscription
 
-      // TODO: validate channelId
+    // TODO: validate channelId
 
     // TODO: get the logged-in user's ID from req.user
 

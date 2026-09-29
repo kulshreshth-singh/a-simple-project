@@ -96,9 +96,9 @@ const updateTweet = asyncHandler(async (req, res) => {
     let{newContent} = req.body
      
     // check if empty or not
-if(!isValidObjectId(tweetId)){
+    if(!isValidObjectId(tweetId)){
     throw new ApiError(400, "tweetId is not valid");
-}      // check if empty or not
+    }      // check if empty or not
     if(!newContent?.trim()){
         throw new ApiError(400 , "newContent is required")
     }

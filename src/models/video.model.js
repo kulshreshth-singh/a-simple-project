@@ -43,4 +43,14 @@ const videoSchema = new mongoose.Schema({
 
 videoSchema.plugin(mongooseAggregatePaginate)
 
+// The pagination plugin helps you get information about the whole paginated result, such as:
+
+// current page
+// number of documents per page
+// total matching documents
+// total pages
+// current page's documents
+
+
+
 export const Video = mongoose.model("Video",videoSchema);
